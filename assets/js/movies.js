@@ -24,7 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p class="card-text">
                             ${'★'.repeat(Math.round(movie.vote_average / 2))}
                             ${'☆'.repeat(5 - Math.round(movie.vote_average / 2))}
-                        </p>
+                         <button class="details-btn" data-title="${movie.title}" data-description="${movie.overview}" data-id="${movie.id}"
+                         data-star="${'★'.repeat(Math.round(movie.vote_average / 2))}
+                         ${'☆'.repeat(5 - Math.round(movie.vote_average / 2))}" data-video="${movie.video_url}"
+                         >View Details</button>
+                         </p>
                     </div>
                 </div>
             `;
@@ -121,4 +125,54 @@ document.addEventListener('DOMContentLoaded', () => {
             searchResults.style.display = 'block'; // Show error message
         });
     });
+
+    const defaultGenreCheckbox = document.getElementById('genre-28'); // Adjust the ID as needed
+    if (defaultGenreCheckbox) {
+        defaultGenreCheckbox.checked = true;
+        fetchMoviesByGenres(); // Call to fetch movies based on the default genre
+    }
+
+    // Get the modal element
+    let modal = document.getElementById("popup-modal");
+
+    // Get the <span> element that closes the modal
+    let span = document.getElementsByClassName("close")[0];
+
+    // Get the modal elements to populate
+    let modalTitle = document.getElementById("modal-title");
+    let modalDescription = document.getElementById("modal-description");
+    let modalStars = document.getElementById("modal-stars");
+    let modalVideo = document.getElementById("modal-video"); // Récupérer l'URL de la vidéo
+
+    // Event delegation for dynamically added buttons
+    movieList.addEventListener('click', (event) => {
+        if (event.target.classList.contains("details-btn")) {
+            const movieTitle = event.target.getAttribute("data-title");
+            const movieDescription = event.target.getAttribute("data-description");
+            const movieEtoile = event.target.getAttribute("data-star");
+            const movieVideo = event.target.getAttribute("data-video");
+
+            // Set the movie data in the modal
+            modalTitle.textContent = movieTitle;
+            modalDescription.textContent = movieDescription;
+            modalStars.textContent = movieEtoile;
+            modalVideo.src = movieVideo;
+
+            // Open the modal
+            modal.style.display = "block";
+        }
+    });
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+     
 });

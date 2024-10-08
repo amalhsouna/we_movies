@@ -20,6 +20,32 @@ class TMDBService extends AbstractTMDBService
             'with_genres' => implode(',', $genreIds),
         ];
 
-        return $this->makeApiRequest('discover/movie', $query)['results'];
+        $movies = $this->makeApiRequest('discover/movie', $query)['results'];
+
+        foreach ($movies as &$movie) {
+            $movie['video_url'] = $this->getVideoUrl($movie['id']); // Récupérez l'URL de la vidéo
+        }
+
+        return $movies;
+    }
+
+    public function searchMovies(string $query): array
+    {
+        $queryParams = [
+            'query' => $query,
+            'include_adult' => 'false',
+            'language' => 'en-US',
+            'page' => 1,
+        ];
+
+        return $this->makeApiRequest('search/movie', $queryParams)['results'] ?? [];
+    }
+
+    private function getVideoUrl(int $movieId): string
+    {
+        // Récupérer les détails du film pour obtenir l'URL de la vidéo
+        $videoData = $this->makeApiRequest("movie/$movieId/videos");
+
+        return $videoData['results'][0]['key'] ? 'https://www.youtube.com/embed/'.$videoData['results'][0]['key'] : ''; // Modifiez selon votre logique d'URL
     }
 }

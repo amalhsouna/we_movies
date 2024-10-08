@@ -43,9 +43,8 @@ class MovieController extends AbstractController
 
         $moviesByGenre = [];
         try {
-            // Retrieve movies by genre
+            // Retrieve movies by genres
             $moviesByGenre = $this->movieService->getMoviesByGenre($selectedGenres);
-            // dd($moviesByGenre);
         } catch (\Exception $e) {
             // Log the exception and return an error response
             error_log('Error retrieving movies: '.$e->getMessage());
@@ -54,5 +53,34 @@ class MovieController extends AbstractController
         }
 
         return new JsonResponse($moviesByGenre);
+    }
+
+    /**
+     * @Route("/movies/search", name="movies_search", methods={"GET"})
+     */
+    public function searchMovies(Request $request): JsonResponse
+    {
+        $query = $request->query->get('query');
+
+        if (!$query) {
+            return new JsonResponse([]); // Return an empty array if no query
+        }
+
+        // Call your TMDB service or whatever method to search for movies
+        $results = $this->movieService->searchMovies($query); // Assuming this returns an array of movies
+
+        return new JsonResponse($results);
+    }
+
+    /**
+     * @Route("/movies/genre/{id}", name="movies_by_genre", methods={"GET"})
+     */
+    public function moviesByGenre(int $id): Response
+    {
+        $movies = $this->movieService->getMoviesByGenre($id);
+
+        return $this->render('movies/genre.html.twig', [
+            'movies' => $movies,
+        ]);
     }
 }

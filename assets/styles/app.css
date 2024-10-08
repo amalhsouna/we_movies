@@ -1,18 +1,5 @@
 body {
-    background-color: lightgray;
+    background-color: rgb(255, 255, 255);
 }
 
-.search-results {
-    border: 1px solid #ccc;
-    max-height: 200px;
-    overflow-y: auto;
-    display: none; /* Hidden by default */
-}
-.search-results div {
-    padding: 10px;
-    cursor: pointer;
-}
-.search-results div:hover {
-    background-color: #f0f0f0;
-}
 

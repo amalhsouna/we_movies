@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Cinema Project{% endblock %}</title>
+    <title>{% block title %}A propos de We movies{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-    {% block stylesheets %}{% endblock %}
+    {% block stylesheets %}
+       {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 </head>
 <body>
     <header>
-        <h1>{% block header %}Cinema Project{% endblock %}</h1>
+        <h1>{% block header %}A propos de We movies{% endblock %}</h1>
     </header>
 
     <div class="container">
