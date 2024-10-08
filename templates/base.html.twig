@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Cinema Project{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1>{% block header %}Cinema Project{% endblock %}</h1>
+    </header>
+
+    <div class="container">
+        <section>
+            {% block content %}{% endblock %}
+        </section>
+    </div>
+
+    <footer>
+        {% block footer %}
+        <p>&copy; 2024 Cinema Project</p>
+        {% endblock %}
+    </footer>
+
+    <script src="{{ asset('build/app.js') }}"></script>
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

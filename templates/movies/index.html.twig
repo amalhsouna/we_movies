@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Films{% endblock %}
+
+{% block content %}
+    <div class="search-container">
+        <input type="text" id="movie-search" placeholder="Search for a movie..." autocomplete="off">
+        <div id="search-results" class="search-results"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2>Genres</h2>
+            <form id="genre-form">
+                <ul>
+                    {% for genre in genres %}
+                        <li>
+                            <input type="checkbox" class="genre-checkbox" value="{{ genre.id }}" id="genre-{{ genre.id }}">
+                            <label for="genre-{{ genre.id }}">{{ genre.name }}</label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </form>
+        </div>
+
+        <div class="col-md-9">
+            <h2>Films</h2>
+            <div id="movies-list" class="row">
+                {# Movies will be displayed here dynamically #}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('movies') }}
+{% endblock %}
