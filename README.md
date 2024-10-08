@@ -26,7 +26,17 @@ The Movie Filter and Search Application is a web-based application that allows u
    git clone https://github.com/amalhsouna/we_movies
    cd we_movies
 
-1. **Install PHP dependencies**
-   ```bash
-   git clone https://github.com/amalhsouna/we_movies
-   cd we_moviesy
+2. **Install PHP dependencies**
+   composer install
+
+3. **Install JavaScript dependencies with Webpack Encore**
+   npm install
+
+   If you are using Yarn:
+    yarn install
+
+4. **Compile assets with Webpack Encore**
+   npm run dev
+
+5. **Start the Symfony server**
+   symfony server:start

@@ -42,14 +42,15 @@ class MovieController extends AbstractController
         }
 
         $moviesByGenre = [];
-        // try {
-        // Retrieve movies by genres
-        $moviesByGenre = $this->movieService->getMoviesByGenre($selectedGenres);
-        // } catch (\Exception $e) {
-        //     // Log the exception and return an error response
-        //     error_log('Error retrieving movies: ' . $e->getMessage());
-        //     return new JsonResponse(['error' => 'Could not retrieve movies'], 500);
-        // }
+        try {
+            // Retrieve movies by genres
+            $moviesByGenre = $this->movieService->getMoviesByGenre($selectedGenres);
+        } catch (\Exception $e) {
+            // Log the exception and return an error response
+            error_log('Error retrieving movies: '.$e->getMessage());
+
+            return new JsonResponse(['error' => 'Could not retrieve movies'], 500);
+        }
 
         return new JsonResponse($moviesByGenre);
     }
@@ -66,7 +67,7 @@ class MovieController extends AbstractController
         }
 
         // Call your TMDB service or whatever method to search for movies
-        $results = $this->movieService->searchMovies($query); // Assuming this returns an array of movies
+        $results = $this->movieService->searchMovies($query);
 
         return new JsonResponse($results);
     }
@@ -74,14 +75,10 @@ class MovieController extends AbstractController
     /**
      * @Route("/movie/{movieId}/videos", name="movies_video_id", methods={"GET"})
      */
-    public function videoMovies(Request $request, int $movieId): JsonResponse
+    public function videoMovies(int $movieId): JsonResponse
     {
-        // if (!$query) {
-        //     return new JsonResponse([]); // Return an empty array if no query
-        // }
-
-        // Call your TMDB service or whatever method to search for movies
-        $results = $this->movieService->getVideoMovie($movieId); // Assuming this returns an array of movies
+        // Call your TMDB service or whatever method to search video for movies
+        $results = $this->movieService->getVideoMovie($movieId);
 
         return new JsonResponse($results);
     }

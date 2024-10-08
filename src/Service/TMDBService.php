@@ -23,7 +23,7 @@ class TMDBService extends AbstractTMDBService
         $movies = $this->makeApiRequest('discover/movie', $query)['results'];
 
         foreach ($movies as &$movie) {
-            $movie['video_url'] = $this->getVideoUrl($movie['id']); // Récupérez l'URL de la vidéo
+            $movie['video_url'] = $this->getVideoUrl($movie['id']); // get video url
         }
 
         return $movies;

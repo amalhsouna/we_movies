@@ -1,5 +1,5 @@
 /*
- * Welcome to your app's movies JavaScript file!
+ * Welcome to your movies's JavaScript file!
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('movie-search');
     const searchResults = document.getElementById('search-results');
 
-    // Fonction pour mettre à jour la liste des films
+    // update list of movies
     const updateMovieList = (movies) => {
-        movieList.innerHTML = ''; // Réinitialise la liste
+        movieList.innerHTML = '';
         movies.forEach(movie => {
             const movieItem = document.createElement('div');
             movieItem.classList.add('col-md-12');
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Fonction pour récupérer les films en fonction des genres sélectionnés
+    // get movies by gender
     const fetchMoviesByGenres = () => {
         const selectedGenres = [];
         genreCheckboxes.forEach(checkbox => {
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (selectedGenres.length > 0) {
             const body = new URLSearchParams();
             selectedGenres.forEach(genre => {
-                body.append('genres[]', genre); // Ajoute chaque genre au corps
+                body.append('genres[]', genre); 
             });
     
             fetch('/movies/filter', {
@@ -67,14 +67,14 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(updateMovieList)
             .catch(error => {
                 console.error('Error fetching movies:', error);
-                movieList.innerHTML = '<p>Error retrieving movies</p>'; // Afficher un message d'erreur
+                movieList.innerHTML = '<p>Error retrieving movies</p>'; 
             });
         } else {
-            movieList.innerHTML = '<p>Aucun genre sélectionné.</p>'; // Afficher un message si aucune checkbox n'est cochée
+            movieList.innerHTML = '<p>Aucun genre sélectionné.</p>'; 
         }
     };    
 
-    // Événement sur le changement des checkboxes
+    // Checkbox change event
     genreForm.addEventListener('change', fetchMoviesByGenres);
 
     // Événement sur la saisie dans le champ de recherche
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             searchResults.innerHTML = ''; // Clear previous results
             if (!Array.isArray(movies) || movies.length === 0) {
                 searchResults.style.display = 'none';
-                return; // Hide results if no movies found
+                return; 
             }
 
             movies.forEach(movie => {
@@ -109,9 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <strong>${movie.title}</strong> (${movie.release_date ? movie.release_date.split('-')[0] : 'N/A'})
                 `;
                 resultItem.addEventListener('click', () => {
-                    searchInput.value = movie.title; // Set input value to the selected movie title
-                    searchResults.innerHTML = ''; // Clear results
-                    searchResults.style.display = 'none'; // Hide results
+                    searchInput.value = movie.title; 
+                    searchResults.innerHTML = ''; 
+                    searchResults.style.display = 'none';
                     fetch(`/movie/${movie.id}/videos`, {
                         method: 'GET',
                         
@@ -133,25 +133,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 searchResults.appendChild(resultItem);
             });
 
-            searchResults.style.display = 'block'; // Show results
+            searchResults.style.display = 'block'; 
         })
         .catch(error => {
             console.error('Error:', error);
-            searchResults.innerHTML = '<p>Error retrieving movies</p>'; // Display error message
-            searchResults.style.display = 'block'; // Show error message
+            searchResults.innerHTML = '<p>Error retrieving movies</p>';
+            searchResults.style.display = 'block'; 
         });
     });
 
-    const defaultGenreCheckbox = document.getElementById('genre-28'); // Adjust the ID as needed
+    const defaultGenreCheckbox = document.getElementById('genre-28'); 
     if (defaultGenreCheckbox) {
         defaultGenreCheckbox.checked = true;
         fetchMoviesByGenres(); // Call to fetch movies based on the default genre
     }
 
-    // Get the modal element
+    // Modal js
     let modal = document.getElementById("popup-modal");
 
-    // Get the <span> element that closes the modal
     let span = document.getElementsByClassName("close")[0];
 
     // Get the modal elements to populate
@@ -179,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
         modal.style.display = "none";
     };
