@@ -15,7 +15,7 @@ class TMDBServiceTest extends TestCase
     protected function setUp(): void
     {
         $this->client = $this->createMock(HttpClientInterface::class);
-        $this->tmdbService = new TMDBService($this->client, 'test_api_key', 'TMDB_API_URL');
+        $this->tmdbService = new TMDBService($this->client, 'test_api_key', 'https://api.themoviedb.org/3');
     }
 
     public function testGetGenres(): void

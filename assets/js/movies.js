@@ -3,7 +3,6 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('dddddddddd');
     const genreCheckboxes = document.querySelectorAll('.genre-checkbox');
     const movieList = document.getElementById('movies-list');
     const genreForm = document.getElementById('genre-form');
@@ -41,13 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 selectedGenres.push(checkbox.value);
             }
         });
-
+    
         if (selectedGenres.length > 0) {
             const body = new URLSearchParams();
             selectedGenres.forEach(genre => {
                 body.append('genres[]', genre); // Ajoute chaque genre au corps
             });
-
+    
             fetch('/movies/filter', {
                 method: 'POST',
                 headers: {
@@ -55,16 +54,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: body
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(updateMovieList)
             .catch(error => {
                 console.error('Error fetching movies:', error);
                 movieList.innerHTML = '<p>Error retrieving movies</p>'; // Afficher un message d'erreur
             });
         } else {
-            movieList.innerHTML = ''; // Si aucune checkbox n'est cochée
+            movieList.innerHTML = '<p>Aucun genre sélectionné.</p>'; // Afficher un message si aucune checkbox n'est cochée
         }
-    };
+    };    
 
     // Événement sur le changement des checkboxes
     genreForm.addEventListener('change', fetchMoviesByGenres);

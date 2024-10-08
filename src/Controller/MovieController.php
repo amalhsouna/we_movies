@@ -35,20 +35,24 @@ class MovieController extends AbstractController
      */
     public function filterMovies(Request $request): JsonResponse
     {
-        error_log(print_r($request->request->all(), true));
-        $selectedGenres = $request->request->get('genres');
+        $selectedGenres = $request->request->all('genres');
 
         if (!is_array($selectedGenres)) {
             return new JsonResponse(['error' => 'Invalid Genres'], 400);
         }
 
-        $movies = [];
-        foreach ($selectedGenres as $genreId) {
-            // Replace this method with one that retrieves movies by genre
-            $moviesByGenre = $this->movieService->getMoviesByGenre((int) $genreId);
-            $movies = array_merge($movies, $moviesByGenre);
+        $moviesByGenre = [];
+        try {
+            // Retrieve movies by genre
+            $moviesByGenre = $this->movieService->getMoviesByGenre($selectedGenres);
+            // dd($moviesByGenre);
+        } catch (\Exception $e) {
+            // Log the exception and return an error response
+            error_log('Error retrieving movies: '.$e->getMessage());
+
+            return new JsonResponse(['error' => 'Could not retrieve movies'], 500);
         }
 
-        return new JsonResponse($movies);
+        return new JsonResponse($moviesByGenre);
     }
 }
