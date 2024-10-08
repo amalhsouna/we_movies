@@ -4,6 +4,7 @@ namespace App\tests\Service;
 
 use App\Service\TMDBService;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
@@ -31,12 +32,41 @@ class TMDBServiceTest extends TestCase
 
     public function testGetMoviesByGenre(): void
     {
+        // Mock reponse of api
         $responseMock = $this->createMock(ResponseInterface::class);
-        $responseMock->method('toArray')->willReturn(['results' => [['title' => 'Movie 1'], ['title' => 'Movie 2']]]);
+        $responseMock->method('toArray')->willReturn([
+            'results' => [
+                ['id' => 1, 'title' => 'Movie 1'],
+                ['id' => 2, 'title' => 'Movie 2'],
+            ]
+        ]);
+
         $this->client->method('request')->willReturn($responseMock);
 
-        $movies = $this->tmdbService->getMoviesByGenre(1);
+        $movies = $this->tmdbService->getMoviesByGenre([1, 2]);
         $this->assertCount(2, $movies);
         $this->assertEquals('Movie 1', $movies[0]['title']);
+        $this->assertEquals('Movie 2', $movies[1]['title']);
     }
+
+    public function testSearchMovies(): void
+    {
+    // Mock response of api
+    $responseMock = $this->createMock(ResponseInterface::class);
+    $responseMock->method('toArray')->willReturn([
+        'results' => [
+            ['id' => 1, 'title' => 'Search Movie 1'],
+            ['id' => 2, 'title' => 'Search Movie 2'],
+        ]
+    ]);
+
+    $this->client->method('request')->willReturn($responseMock);
+
+    $movies = $this->tmdbService->searchMovies('Some Query');
+
+    // Assertions
+    $this->assertCount(2, $movies);
+    $this->assertEquals('Search Movie 1', $movies[0]['title']);
+    $this->assertEquals('Search Movie 2', $movies[1]['title']);
+  }
 }
