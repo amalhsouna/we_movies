@@ -14,10 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
         movieList.innerHTML = ''; // Réinitialise la liste
         movies.forEach(movie => {
             const movieItem = document.createElement('div');
-            movieItem.classList.add('col-md-4');
+            movieItem.classList.add('col-md-12');
             movieItem.innerHTML = `
-                <div class="card">
-                    <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" class="card-img-top" alt="${movie.title}">
+                <div class="card d-flex flex-row align-items-start">
+                    <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" class="card-img-left img-fluid movie-poster" alt="${movie.title}">
                     <div class="card-body">
                         <h5 class="card-title">${movie.title}</h5>
                         <p class="card-text">${movie.overview}</p>
@@ -112,7 +112,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     searchInput.value = movie.title; // Set input value to the selected movie title
                     searchResults.innerHTML = ''; // Clear results
                     searchResults.style.display = 'none'; // Hide results
-                    // Optionally, trigger a function to display movie details
+                    fetch(`/movie/${movie.id}/videos`, {
+                        method: 'GET',
+                        
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(result => {
+                        console.log(result);
+                        if (result) {
+                            movie.video_url = result
+                            updateMovieList([movie]);    
+                        }
+                    });
                 });
                 searchResults.appendChild(resultItem);
             });

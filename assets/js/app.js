@@ -6,11 +6,11 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './movies'; // Importez votre fichier de script pour les films
-import '../styles/app.css'; // Importez le CSS principal
-import '../styles/movies.css'; // Importez le CSS spécifique aux films
+import './movies'; // Import your movie script file
+import '../styles/app.css'; // Import main CSS
+import '../styles/movies.css'; // Import movie-specific CSS
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-// Example of a global event listener or functionality
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('App is initialized');
 });

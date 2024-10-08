@@ -41,11 +41,16 @@ class TMDBService extends AbstractTMDBService
         return $this->makeApiRequest('search/movie', $queryParams)['results'] ?? [];
     }
 
+    public function getVideoMovie(int $idMovie): string
+    {
+        return $this->getVideoUrl($idMovie);
+    }
+
     private function getVideoUrl(int $movieId): string
     {
-        // Récupérer les détails du film pour obtenir l'URL de la vidéo
+        // Retrieve movie details to get video URL
         $videoData = $this->makeApiRequest("movie/$movieId/videos");
 
-        return $videoData['results'][0]['key'] ? 'https://www.youtube.com/embed/'.$videoData['results'][0]['key'] : ''; // Modifiez selon votre logique d'URL
+        return (count($videoData['results']) > 0) && $videoData['results'][0]['key'] ? 'https://www.youtube.com/embed/'.$videoData['results'][0]['key'] : ''; // Modifiez selon votre logique d'URL
     }
 }

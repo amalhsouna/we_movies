@@ -3,9 +3,12 @@
 {% block title %}Liste des Films{% endblock %}
 
 {% block content %}
+    <div class="header-container">
+        <h1 class="page-title"> A propos de We movies </h1>
+        {% include 'movies/search_bar.html.twig' %}
+   </div>
     <div class="row">
-   {% include 'movies/search_bar.html.twig' %}
-        <div class="col-md-3">
+        <div class="col-md-3 genres-container">
             <h2>Genres</h2>
             <form id="genre-form">
                 <ul>
@@ -19,12 +22,12 @@
             </form>
         </div>
 
-        <div class="col-md-9">
-            <h2>Films</h2>
+        <div class="col-md-8">
             <div id="movies-list" class="row">
                 {# Movies will be displayed here dynamically #}
             </div>
         </div>
+    </div>
     </div>
 
  <!-- The Popup Modal -->

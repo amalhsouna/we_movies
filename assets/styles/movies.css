@@ -1,53 +1,179 @@
+/* Container for the title and search bar */
+.header-container {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 20px; 
+    background-color: #f5f5f5; 
+    border-bottom: 2px solid #ddd; 
+}
+
+/* Styling for the page title */
+.page-title {
+    font-size: 20px; 
+    color: #5c5555; 
+    margin: 0;
+    text-decoration: underline;
+}
+
+/* Container for the search bar */
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px; /* Limit the width of the search bar */
+}
+
+/* Input field styling */
+.search-input {
+    width: 80%;
+    padding: 10px 40px 10px 20px;
+    border: 2px solid #4CAF50;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+/* Change border color on focus */
+.search-input:focus {
+    border-color: #45a049;
+    outline: none;
+}
+
+/* Button styling */
+.search-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Change background color on hover */
+.search-button:hover {
+    background-color: #45a049;
+}
+
+/* Search results container */
+.search-results {
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 0 0 25px 25px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+}
+
+/* Individual search result */
+.search-results div {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
 .search-results div:hover {
     background-color: #f0f0f0;
 }
 
-.search-results {
-    border: 1px solid #ccc;
-    max-height: 200px;
-    overflow-y: auto;
-    display: none; /* Hidden by default */
+/* css of list of gendre*/
+.genres-container {
+    border: 2px solid #3c3d3f;
+    border-radius: 5px; 
+    padding: 15px; 
+    position: relative; 
+    margin-top: 20px; 
 }
-.search-results div {
-    padding: 10px;
+
+.genres-container h2 {
+    position: absolute;
+    top: -2px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    background-color: white; 
+    padding: 0 10px;
+    color: #007bff; 
+    font-size: 20px;
+}
+
+.genres-container ul {
+    list-style-type: none;
+    padding: 0; 
+}
+
+.genres-container ul li {
+    padding: 10px 15px;
+    margin: 5px 0;
+    transition: background-color 0.3s, color 0.3s; 
     cursor: pointer;
+    text-align: center;
 }
-.search-results div:hover {
-    background-color: #f0f0f0;
+/** css of genre list **/
+div#movies-list {
+    margin-top: 18px;
+}
+
+.card {
+    border: none;
+}
+
+.card.d-flex.flex-row.align-items-start {
+    background: #dfdef5;
+    margin: 10px 0 10px 0;
+}
+
+.card-img-left {
+    max-width: 150px;
+    margin: 20px 12px 10px;
+    object-fit: cover;
+}
+
+.card-body {
+    flex: 1;
+}
+
+.movie-poster {
+    width: 150px;
+    height: auto;
 }
 
 /* Modal styles */
 .modal {
-    display: none; /* Masquer par défaut */
-    position: fixed; /* Rester au même endroit */
-    z-index: 1; /* Au-dessus de tout le contenu */
+    display: none;
+    position: fixed;
+    z-index: 1; 
     left: 0;
     top: 0;
-    width: 100%; /* Plein écran */
-    height: 100%; /* Plein écran */
-    overflow: auto; /* Activer le défilement si nécessaire */
-    background-color: rgb(0,0,0); /* Couleur de fond noire */
-    background-color: rgba(0,0,0,0.4); /* Couleur de fond noire avec transparence */
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
 }
 
 .modal-content {
-    background-color: #fefefe; /* Couleur de fond blanche */
-    margin: 15% auto; /* 15% du haut et centré */
-    padding: 20px; /* Espacement interne */
-    border: 1px solid #888; /* Bordure */
-    width: 80%; /* Largeur du modal */
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888; 
+    width: 80%;
 }
 
 .close {
-    color: #aaa; /* Couleur du 'x' */
-    float: right; /* Alignement à droite */
-    font-size: 28px; /* Taille de police */
-    font-weight: bold; /* Gras */
+    color: #aaa; 
+    float: right; 
+    font-size: 28px; 
+    font-weight: bold; 
 }
 
 .close:hover,
 .close:focus {
-    color: black; /* Couleur au survol */
-    text-decoration: none; /* Pas de soulignement */
-    cursor: pointer; /* Changer le curseur */
+    color: black;
+    text-decoration: none; 
+    cursor: pointer; 
 }
