@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p class="card-text">
                             ${'★'.repeat(Math.round(movie.vote_average / 2))}
                             ${'☆'.repeat(5 - Math.round(movie.vote_average / 2))}
-                         <button class="details-btn" data-title="${movie.title}" data-description="${movie.overview}" data-id="${movie.id}"
+                         <button class="details-btn btn btn-primary" data-title="${movie.title}" data-description="${movie.overview}" data-id="${movie.id}"
                          data-star="${'★'.repeat(Math.round(movie.vote_average / 2))}
                          ${'☆'.repeat(5 - Math.round(movie.vote_average / 2))}" data-video="${movie.video_url}"
                          >View Details</button>

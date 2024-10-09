@@ -29,6 +29,11 @@ The Movie Filter and Search Application is a web-based application that allows u
 2. **Install PHP dependencies**
    composer install
 
+4. **Copy Environment File**
+   cp .env.dist .env And Add your TMDB_API_KEY
+
+   **(You must create your account in https://developer.themoviedb.org/docs/getting-started)
+
 3. **Install JavaScript dependencies with Webpack Encore**
    npm install
 
@@ -40,3 +45,21 @@ The Movie Filter and Search Application is a web-based application that allows u
 
 5. **Start the Symfony server**
    symfony server:start
+
+6. ** Running Tests
+   To run the tests, ensure that all dependencies are installed, then execute the following command:
+
+   ```bash
+   php bin/phpunit
+
+## Running CS Fixer
+
+To automatically fix the code according to the PSR-12 coding standard, you can use PHP CS Fixer. Run the following command:
+
+  vendor/bin/php-cs-fixer fix
+
+##  Running Docker
+
+docker-compose up -d
+
+
