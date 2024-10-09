@@ -8,9 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MoviesTest extends WebTestCase
 {
-    private const BASE_URL = '/';
     private const FILTER_URL = '/movies/filter';
-    private const SEARCH_URL = '/movies/search?query=';
 
     /**
      * @dataProvider genreProvider
@@ -37,6 +35,24 @@ class MoviesTest extends WebTestCase
             [35]
         ];
     }
+
+    public function testSearchMoviesReturnsResults(): void
+    {
+        $client = $this->getClient();
+       
+        // Call /movies/search with query
+        $client->request('GET', '/movies/search', ['query' => 'Inception']);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertResponseHeaderSame('content-type', 'application/json');
+
+        // Decode of JSON
+        $response = json_decode($client->getResponse()->getContent(), true);
+        
+        $this->assertIsArray($response);
+        $this->assertNotEmpty($response, 'The response should contain movie results.');
+    }
+
 
     
     private function getClient(): KernelBrowser
