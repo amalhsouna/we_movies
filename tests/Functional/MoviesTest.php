@@ -4,6 +4,7 @@ namespace App\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class MoviesTest extends WebTestCase
@@ -53,7 +54,18 @@ class MoviesTest extends WebTestCase
         $this->assertNotEmpty($response, 'The response should contain movie results.');
     }
 
+    public function testFilterMoviesInvalidGenres()
+    {
+        $client = $this->getClient();
+        // POST request with invalid genres
+        $client->request('POST', '/movies/filter', []);
 
+        $response = $client->getResponse();
+
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        $this->assertEquals(400, $response->getStatusCode());
+        $this->assertEquals(['error' => 'Invalid Genres'], json_decode($response->getContent(), true));
+    }
     
     private function getClient(): KernelBrowser
     {

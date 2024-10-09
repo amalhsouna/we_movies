@@ -60,6 +60,6 @@ To automatically fix the code according to the PSR-12 coding standard, you can u
 
 ##  Running Docker
 
-docker-compose up -d
+docker-compose up -d and You can show the web application http://localhost:8000/
 
 
