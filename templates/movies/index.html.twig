@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} We movies {% endblock %}
+
+{% block content %}
+    <div class="header-container">
+        <h1 class="page-title"> A propos de We movies </h1>
+        {% include 'movies/search_bar.html.twig' %}
+   </div>
+   {# main video #}
+  <div class="row col-12 banner position-relative">
+    <div class="banner-video">
+        <iframe class="embed-responsive-item" src="{{ mainVideo }}" allowfullscreen></iframe>
+    </div>
+    <div class="resume row align-items-center position-absolute">
+        <div class="image col-md-2">
+            <img src="https://image.tmdb.org/t/p/w500/{{ firstPopularMovie.poster_path }}" class="img-fluid rounded" alt="{{ firstPopularMovie.title }}" />
+        </div>
+        <div class="desc col-md-10">
+            <h3 class="title">{{ firstPopularMovie.title }}</h3>
+            <p class="description">{{ firstPopularMovie.overview }}</p>
+        </div>
+    </div>
+</div>
+
+    <div class="row">
+        <div class="col-md-3 genres-container">
+            <h2>Genres</h2>
+            <div class="search_form">
+                <form id="genre-form">
+                    <ul>
+                        {% for genre in genres %}
+                            <li>
+                                <input type="checkbox" class="genre-checkbox" value="{{ genre.id }}" id="genre-{{ genre.id }}">
+                                <label for="genre-{{ genre.id }}">{{ genre.name }}</label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div id="movies-list" class="row">
+                {# Movies will be displayed here dynamically #}
+            </div>
+            <div id="pagination" class="pagination"></div>
+        </div>
+    </div>
+    </div>
+
+ <!-- The Popup Modal -->
+  {# Include the popup modal #}
+  {% include 'movies/popup_movie_details.html.twig' %}
+  {% include 'movies/search_bar.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('movies') }}
+{% endblock %}
+

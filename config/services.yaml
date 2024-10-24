@@ -19,6 +19,21 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    
+    App\Service\MovieService:
+        arguments:
+            $tmdbApiKey: '%env(string:TMDB_API_KEY)%' # Injecte la clé API depuis l'environnement
+            $tmdbApiUrl: '%env(string:TMDB_API_URL)%' # Injecte l'URL de base de l'API depuis l'environnement
+   
+    App\Service\VideoService:
+        arguments:
+            $tmdbApiKey: '%env(string:TMDB_API_KEY)%' # Injecte la clé API depuis l'environnement
+            $tmdbApiUrl: '%env(string:TMDB_API_URL)%' # Injecte l'URL de base de l'API depuis l'environnement
+
+    App\Service\GenderService:
+        arguments:
+            $tmdbApiKey: '%env(string:TMDB_API_KEY)%' # Injecte la clé API depuis l'environnement
+            $tmdbApiUrl: '%env(string:TMDB_API_URL)%' # Injecte l'URL de base de l'API depuis l'environnement
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
