@@ -1,0 +1,304 @@
+/* Container for the title and search bar */
+.header-container {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 20px; 
+    background-color: #f5f5f5; 
+    border-bottom: 2px solid #ddd; 
+}
+
+/* Styling for the page title */
+.page-title {
+    font-size: 20px; 
+    color: #5c5555; 
+    margin: 0;
+    text-decoration: underline;
+}
+
+/* Container for the search bar */
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px; /* Limit the width of the search bar */
+}
+
+/* Input field styling */
+.search-input {
+    width: 80%;
+    padding: 10px 40px 10px 20px;
+    border: 2px solid #4CAF50;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+/* Change border color on focus */
+.search-input:focus {
+    border-color: #45a049;
+    outline: none;
+}
+
+/* Button styling */
+.search-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Change background color on hover */
+.search-button:hover {
+    background-color: #45a049;
+}
+
+/* Search results container */
+.search-results {
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 0 0 25px 25px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+}
+
+/* Individual search result */
+.search-results div {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.search-results div:hover {
+    background-color: #f0f0f0;
+}
+
+/* Ensures the video takes the full width and height of the banner and stays in the background */
+.banner {
+    height: 500px; 
+    overflow: hidden;
+    position: relative;
+}
+
+.banner-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    object-fit: cover; /* Assure que la vidéo couvre tout le fond */
+}
+
+.resume {
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5); 
+    padding: 20px;
+    color: white;
+    bottom: 0px;
+}
+
+.resume .image img {
+    max-width: 100%;
+    border-radius: 10px;
+    width: 145px;
+}
+
+.resume .desc {
+    padding-left: 20px;
+}
+
+.resume .title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.resume .description {
+    font-size: 1rem;
+}
+
+/* css of list of gendre*/
+.genres-container {
+    position: relative; 
+    margin-top: 20px; 
+}
+.genres-container h2 {
+    position: absolute;
+    top: -2px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    background-color: white; 
+    padding: 0 10px;
+    color: #007bff; 
+    font-size: 20px;
+}
+.genres-container .search_form{
+    border: 2px solid #3c3d3f;
+    border-radius: 5px; 
+    padding: 15px; 
+}
+.genres-container ul {
+    list-style-type: none;
+    padding: 0; 
+}
+
+.genres-container ul li {
+    padding: 10px 15px;
+    margin: 5px 0;
+    transition: background-color 0.3s, color 0.3s; 
+    cursor: pointer;
+    text-align: left;
+}
+/*** css list of films ***/
+.card {
+    margin-bottom: 20px;
+}
+
+.card-img-left {
+    width: 150px; 
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.stars {
+    font-size: 1.6rem;
+    color: #3266dd;
+    margin-top: -7px;
+}
+
+.rate {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.description {
+    margin-top: 10px;
+    flex-grow: 1;
+}
+
+.release-date {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 10px;
+}
+
+.details-btn {
+    margin-top: 10px;
+    align-self: flex-end; 
+}
+
+/** css of genre list **/
+div#movies-list {
+    margin-top: 18px;
+}
+
+.card {
+    border: none;
+}
+
+.card.d-flex.flex-row.align-items-start {
+    background: #dfdef5;
+    margin: 10px 0 10px 0;
+}
+
+.card-img-left {
+    max-width: 150px;
+    margin: 20px 12px 10px;
+    object-fit: cover;
+}
+
+.card-body {
+    flex: 1;
+}
+
+.movie-poster {
+    width: 150px;
+    height: auto;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888; 
+    width: 80%;
+}
+
+.close {
+    color: #aaa; 
+    float: right; 
+    font-size: 28px; 
+    font-weight: bold; 
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none; 
+    cursor: pointer; 
+}
+
+.modal-info {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.modal-info p {
+    margin: 0;
+}
+
+span#modal-vote-rate {
+    background: black;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+p#modal-stars {
+    color: #efff00cc;
+}
+
+/* Styling for pagination */
+.pagination button {
+    margin: 5px;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.pagination button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+
